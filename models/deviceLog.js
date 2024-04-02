@@ -25,6 +25,6 @@ DeviceLog.sync()
     console.log('DeviceLog table created successfully.');
   })
   .catch(err => {
-    console.error('Unable to create Device table:', err);
+    console.error('Unable to create Device table :', err);
   });
 module.exports = DeviceLog;
