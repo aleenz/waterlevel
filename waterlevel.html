@@ -1,0 +1,120 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Level</title>
+    
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+</head>
+<body>
+    
+    <h1 id="waterlevel">Loading...</h1>
+    <button onclick="updateWaterLevel()">Actualizar</button>
+    
+<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+
+
+</body>
+
+<script>
+   const xValues = [50,60,70,80,90,100,110,120,130,140,150];
+const yValues = [7,8,8,9,9,9,10,11,14,14,15];
+
+const hostname = window.location.hostname;
+const baseUrl = (hostname === 'localhost' || hostname === '127.0.0.1') ? 'http://localhost:3000' : '';
+
+
+function updateLogs(){
+    fetch(baseUrl+'/getLogs/0001')
+      .then(response => response.json())
+         .then(response =>  {
+            const xValues = response.dates;
+            const yValues = response.percentages;
+            new Chart("myChart", {
+            type: "line",
+            data: {
+                
+                labels: xValues,
+                datasets: [{
+                    label:"Nivel de agua (%)",
+                fill:false,
+                
+                borderColor: "rgba(0,0,255,0.1)",
+                data: yValues
+                }]
+            },
+            options:{
+                scales: {
+                    yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                steps: 10,
+                                stepValue: 10,
+                                max: 100
+                            }
+                        }]
+                }
+            }
+            });
+         })
+       /* .then(data => {
+            console.log(data);
+          // Update the content of the td element with the received data
+          document.getElementById('waterlevel').textContent = data.percentage;
+        })*/
+        .catch(error => {
+          console.error('Error fetching water level:', error);
+          // In case of error, display an error message
+          document.getElementById('waterlevel').textContent = 'Error fetching water level';
+        });
+}
+    function updateWaterLevel() {
+      // Send GET request to localhost:3000/getLevel/0001
+      fetch(baseUrl+'/getLevel/0001')
+      .then(response => response.json())
+         .then(response =>  {
+            let date = Date.now();
+            document.getElementById('waterlevel').innerHTML = response.percentage + " % TIME: " + getCurrentDateTime() 
+         })
+       /* .then(data => {
+            console.log(data);
+          // Update the content of the td element with the received data
+          document.getElementById('waterlevel').textContent = data.percentage;
+        })*/
+        .catch(error => {
+          console.error('Error fetching water level:', error);
+          // In case of error, display an error message
+          document.getElementById('waterlevel').textContent = 'Error fetching water level';
+        });
+    }
+    
+    // Call updateWaterLevel initially
+    updateWaterLevel();
+    updateLogs()
+    // Set interval to call updateWaterLevel every 30 seconds
+    setInterval(updateWaterLevel, 30000);
+    setInterval(updateLogs, 60*1000);
+
+    function getCurrentDateTime() {
+  const now = new Date();
+  
+  // Get date components
+  const day = now.getDate().toString().padStart(2, '0'); // Add leading zero if needed
+  const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Month is zero-based
+  const year = now.getFullYear();
+
+  // Get time components
+  const hour = now.getHours().toString().padStart(2, '0');
+  const minute = now.getMinutes().toString().padStart(2, '0');
+
+  // Construct formatted date string
+  const formattedDateTime = `${day}/${month}/${year} ${hour}:${minute}`;
+  
+  return formattedDateTime;
+}
+    </script>
+</html>

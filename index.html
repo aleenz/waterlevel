@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="msg" type="text"/>
+    <select id="target">
+      <option value="0001">0001</option>
+      <option value="0002">0002</option>
+    </select>
+    <button onclick="sendMessage()">Send Msg</button>
+
+    <button onclick="printMap()">Print Map</button>
+    <script>
+
+
+    
+
+    const socket = new WebSocket("ws://localhost:3000");
+    socket.addEventListener('open',function(event){
+        socket.send('TEST')
+    })
+    socket.addEventListener('message', function(event){
+        console.log('Message from server ', event.data)
+    })
+
+    const sendMessage = () => {
+        socket.send('{"id":"'+document.getElementById("target").value+'","msg":"'+document.getElementById("msg").value +'","type":"msg"}');
+    }
+    const printMap = () => {
+      socket.send('{"id":"'+document.getElementById("target").value+'","msg":"'+document.getElementById("msg").value +'","type":"map"}');
+  }
+</script>
+</body>
+
+
+</html>
