@@ -145,9 +145,9 @@ function formatLogData(data) {
 
     data.forEach(item => {
         // Extract date and time
-        const dateTime = new Date(item.createdAt);
+        //const dateTime = new Date(item.createdAt);
         // Format date-time to your liking
-        const formattedDateTime = `${dateTime.getDate().toString().padStart(2, '0')}/${(dateTime.getMonth() + 1).toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`;        
+        //const formattedDateTime = `${dateTime.getDate().toString().padStart(2, '0')}/${(dateTime.getMonth() + 1).toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`;        
         dates.push((item.createdAt));
         // Extract percentage
         percentages.push(item.percentage);
