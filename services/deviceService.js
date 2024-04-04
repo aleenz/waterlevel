@@ -115,9 +115,13 @@ function getLogs(id){
             const TODAY_START = new Date().setHours(0, 0, 0, 0);
             const TODAY_END = new Date().setHours(23,59,59,999);
             DeviceLog.findAll({
-              attributes:[
-                [db.fn('CONVERT_TZ', db.col("updatedAt,'+00:00','-06:00'"))]
-              ],
+              attributes: {
+                include: [
+                  // This will include a dynamically computed "age" property on all returned instances.
+                  [sql`CONVERT_TZ(updatedAt,'+00:00','-06:00')`, 'time'],
+                ],
+              },
+              
                 where: {
                     device: device.id,
                     createdAt: { 
