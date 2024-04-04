@@ -148,7 +148,7 @@ function formatLogData(data) {
         const dateTime = new Date(item.createdAt);
         // Format date-time to your liking
         const formattedDateTime = `${dateTime.getDate().toString().padStart(2, '0')}/${(dateTime.getMonth() + 1).toString().padStart(2, '0')} ${dateTime.getHours().toString().padStart(2, '0')}:${dateTime.getMinutes().toString().padStart(2, '0')}`;        
-        dates.push(item.createdAt);
+        dates.push(item.createdAt.toString());
         // Extract percentage
         percentages.push(item.percentage);
     });
