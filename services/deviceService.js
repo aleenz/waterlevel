@@ -3,7 +3,7 @@ const db = require('../db').db;
 const Device = require('../models/deviceModel');
 const DeviceInfo = require('../models/deviceInfo');
 const DeviceLog = require('../models/deviceLog');
-
+const { Op } = require("sequelize");
 async function  saveLog(log){
 
         percentage = calcPercentage(log.id,log.value)
@@ -112,7 +112,6 @@ function getLogs(id){
               serial: id
             }
           }).then(device => {
-            const Op = db.Op;
             const TODAY_START = new Date().setHours(0, 0, 0, 0);
             const TODAY_END = new Date().setHours(23,59,59,999);
             DeviceLog.findAll({
