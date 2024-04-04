@@ -116,7 +116,7 @@ function getLogs(id){
             const TODAY_END = new Date().setHours(23,59,59,999);
             DeviceLog.findAll({
               attributes:[
-                [sequelize.fn('CONVERT_TZ', sequelize.col("updatedAt,'+00:00','-06:00'"))]
+                [db.fn('CONVERT_TZ', db.col("updatedAt,'+00:00','-06:00'"))]
               ],
                 where: {
                     device: device.id,
