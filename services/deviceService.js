@@ -112,13 +112,17 @@ function getLogs(id){
               serial: id
             }
           }).then(device => {
-           
+            const Op = Sequelize.Op;
+            const TODAY_START = new Date().setHours(0, 0, 0, 0);
+            const TODAY_END = new Date().setHours(23,59,59,999);
             DeviceLog.findAll({
                 where: {
                     device: device.id,
-                    
+                    created: { 
+                        [Op.gt]: TODAY_START,
+                        [Op.lt]: TODAY_END
+                      },
                 },
-                limit: 24,
                 order: [['id','DESC']]
                 })
                 .then(info => {
