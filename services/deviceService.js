@@ -124,8 +124,8 @@ function getLogs(id){
                 .then(info => {
                 // Use the retrieved information (result)
                     
-                    const res = formatLogData(info);
-                    resolve(res);
+                    //const res = formatLogData(info);
+                    resolve(info);
                 })
                 .catch(error => {
                 // Handle errors if the query fails
