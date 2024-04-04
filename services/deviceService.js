@@ -117,7 +117,7 @@ function getLogs(id){
             DeviceLog.findAll({
                 where: {
                     device: device.id,
-                    created: { 
+                    createdAt: { 
                         [Op.gt]: TODAY_START,
                         [Op.lt]: TODAY_END
                       },
