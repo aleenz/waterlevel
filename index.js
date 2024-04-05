@@ -42,9 +42,7 @@ wss.on('connection', function connection(ws){
         const msg_str = isBinary ? message : message.toString();
         const msg=JSON.parse(msg_str);
         switch(msg.type){
-          case "distanceUpdate":
-            Device.updateDistance(msg);
-            break;
+          
 
           case "logRequest":
             Device.saveLog(msg);
