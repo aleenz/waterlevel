@@ -122,11 +122,14 @@ var html = `
 app.get('/', (req,res) => res.sendFile('./waterlevel.html', {root: __dirname }))
 
 app.get('/getLevel/:id', async (req, res) => {
+  console.log("EEEE" + req);
+
   const { id } = req.params;
   const client = clients.get(id);
   if(client){
     client.send("DistanceRequest");
     client.once('message', (msg) => {
+      
       result = Device.updateDistance(msg);
       if(result){
         Device.getLevel(id).then(level => {
