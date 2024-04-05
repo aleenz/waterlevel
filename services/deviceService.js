@@ -42,8 +42,7 @@ function calcPercentage(id, distance){
 }
 
 function updateDistance(msg){
-    console.log("EEEE" + typeof(msg));
-    console.log("EEEE" + JSON.parse(msg).id);
+   
 
     percentage = calcPercentage(msg.id, msg.value)
 

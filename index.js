@@ -131,7 +131,7 @@ app.get('/getLevel/:id', async (req, res) => {
     
     client.send("DistanceRequest");
     client.once('message', (msg) => {
-      result = Device.updateDistance(msg);
+      result = Device.updateDistance(JSON.parse(msg));
       if(result){
         Device.getLevel(id).then(level => {
           res.setHeader('Content-Type', 'application/json');
