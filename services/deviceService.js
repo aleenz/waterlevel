@@ -67,7 +67,9 @@ function updateDistance(msg){
     .then(result => {
     // Handle the result returned by the stored procedure
       console.log("AAAA" + JSON.stringify(result[0]));
-      console.log("AAAA" + JSON.stringify(result[1]));
+      console.log("AAAA" + JSON.stringify(result[1][0].result));
+      console.log(result[1][0].result);
+      console.log(result[1][0]["result"]);
 
       return result;
     })
