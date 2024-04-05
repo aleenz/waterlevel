@@ -42,7 +42,8 @@ function calcPercentage(id, distance){
 }
 
 function updateDistance(msg){
-    
+    console.log("EEEE" + msg.id);
+
     percentage = calcPercentage(msg.id, msg.value)
 
     /*
