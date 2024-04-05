@@ -122,9 +122,10 @@ var html = `
 app.get('/', (req,res) => res.sendFile('./waterlevel.html', {root: __dirname }))
 
 app.get('/getLevel/:id', async (req, res) => {
-  console.log("EEEE" + req.params);
+  
 
   const { id } = req.params;
+  console.log("EEEE" + id);
   const client = clients.get(id);
   if(client){
     client.send("DistanceRequest");
