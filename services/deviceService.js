@@ -51,6 +51,7 @@ function updateDistance(msg){
 
         // Define the name of the stored procedure and any parameters it requires
     const procedureName = 'updateDistance';
+    console.log(msg);
     const parameters = {
         p_serial:msg.id,
         p_distance:msg.value,
