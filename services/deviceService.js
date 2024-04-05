@@ -65,7 +65,8 @@ function updateDistance(msg){
     })
     .then(result => {
     // Handle the result returned by the stored procedure
-    
+      console.log("AAAA" + result);
+      return result;
     })
     .catch(error => {
     // Handle errors if the stored procedure call fails
@@ -112,11 +113,8 @@ function getLogs(id, date){
               serial: id
             }
           }).then(device => {
-            console.log(date);
             const DATE_START = new Date(Date.parse(date) ).setHours(0, 0, 0, 0);
             const DATE_END = new Date(Date.parse(date)+86400 ).setHours(23,59,59,999);
-            console.log(DATE_START);
-            console.log(DATE_END);
             //db.query('SELECT percentage, CONVERT_TZ(updatedAt,"+00:00","-06:00") AS updatedAt FROM device_log WHERE device = "0001" and updatedAt BETWEEN "2024-04-04 06:00:00" AND "2024-04-05 05:59:59"')
             DeviceLog.findAll({
               

@@ -70,6 +70,9 @@ wss.on('connection', function connection(ws){
   
 })
 
+
+
+
 function sendMessageToClient(clientId, message) {
   const client = clients.get(clientId);
   if (client) {
@@ -122,11 +125,21 @@ app.get('/', (req,res) => res.sendFile('./waterlevel.html', {root: __dirname }))
 
 app.get('/getLevel/:id', async (req, res) => {
   const { id } = req.params;
+  const client = clients.get(id);
+  if(client){
+    client.send("DistanceRequest");
+    ws.once('message', (msg) => {
+      result = Device.updateDistance(msg);
+      if(result){
+        Device.getLevel(id).then(level => {
+          res.setHeader('Content-Type', 'application/json');
+          res.json(level);
+        })  
+      }
+      
+    });
+  }
   
-  Device.getLevel(id).then(level => {
-    res.setHeader('Content-Type', 'application/json');
-    res.json(level);
-  })  
 });
 
 app.get('/getLogs/:id/:date', async (req, res) => {
