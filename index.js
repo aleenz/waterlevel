@@ -125,12 +125,13 @@ app.get('/getLevel/:id', async (req, res) => {
   
 
   const { id } = req.params;
-  console.log("EEEE" + id);
+
   const client = clients.get(id);
   if(client){
+    
     client.send("DistanceRequest");
     client.once('message', (msg) => {
-      
+    console.log("EEEE" + msg);
       result = Device.updateDistance(msg);
       if(result){
         Device.getLevel(id).then(level => {
