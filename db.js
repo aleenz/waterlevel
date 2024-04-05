@@ -6,6 +6,7 @@ const db = new Sequelize(config.development.database, config.development.usernam
   host: config.development.host,
   dialect: config.development.dialect,
   logging: true,
+  multipleStatements: true
   // Additional options...
 });
 module.exports = {db};
