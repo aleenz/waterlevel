@@ -23,7 +23,7 @@ function saveLog(log){
 }
 function updateDistance(msg){
 
-    service.updateDistance(msg);
+    return service.updateDistance(msg);
     
 }
 
