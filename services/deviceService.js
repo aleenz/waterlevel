@@ -115,14 +115,9 @@ function getLogs(id){
             const TODAY_START = new Date().setHours(0, 0, 0, 0);
             const TODAY_END = new Date().setHours(23,59,59,999);
 
-            db.query('SELECT percentage, CONVERT_TZ(updatedAt,"+00:00","-06:00") AS updatedAt FROM device_log WHERE device = "0001" and updatedAt BETWEEN "2024-04-04 06:00:00" AND "2024-04-05 05:59:59"')
-            /*DeviceLog.findAll({
-              attributes: {
-                include: [
-                  // This will include a dynamically computed "age" property on all returned instances.
-                  [sql`CONVERT_TZ(updatedAt,'+00:00','-06:00')`, 'time'],
-                ],
-              },
+            //db.query('SELECT percentage, CONVERT_TZ(updatedAt,"+00:00","-06:00") AS updatedAt FROM device_log WHERE device = "0001" and updatedAt BETWEEN "2024-04-04 06:00:00" AND "2024-04-05 05:59:59"')
+            DeviceLog.findAll({
+              
               
                 where: {
                     device: device.id,
@@ -132,7 +127,7 @@ function getLogs(id){
                       },
                 },
                 order: [['id','DESC']]
-                })*/
+                })
                 .then(info => {
                 // Use the retrieved information (result)
                     
