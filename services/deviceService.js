@@ -105,15 +105,15 @@ function getLevel(id){
     })
 }
 
-function getLogs(id){
+function getLogs(id, date){
     return new Promise((resolve,reject)=>{
         Device.findOne({
             where: {
               serial: id
             }
           }).then(device => {
-            const TODAY_START = new Date().setHours(0, 0, 0, 0);
-            const TODAY_END = new Date().setHours(23,59,59,999);
+            const DATE_START = Date.parse(date).setHours(0, 0, 0, 0);
+            const DATE_END = Date.parse(date).setHours(23,59,59,999);
 
             //db.query('SELECT percentage, CONVERT_TZ(updatedAt,"+00:00","-06:00") AS updatedAt FROM device_log WHERE device = "0001" and updatedAt BETWEEN "2024-04-04 06:00:00" AND "2024-04-05 05:59:59"')
             DeviceLog.findAll({
@@ -122,15 +122,14 @@ function getLogs(id){
                 where: {
                     device: device.id,
                     createdAt: { 
-                        [Op.gt]: TODAY_START,
-                        [Op.lt]: TODAY_END
+                        [Op.gt]: DATE_START,
+                        [Op.lt]: DATE_END
                       },
                 },
                 order: [['id','DESC']]
                 })
                 .then(info => {
                 // Use the retrieved information (result)
-                    
                     //const res = formatLogData(info);
                     resolve(info);
                 })

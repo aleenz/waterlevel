@@ -129,10 +129,10 @@ app.get('/getLevel/:id', async (req, res) => {
   })  
 });
 
-app.get('/getLogs/:id', async (req, res) => {
-  const { id } = req.params;
+app.get('/getLogs/:id/:date', async (req, res) => {
+  const { id,date } = req.params;
   
-  Device.getLogs(id).then(logs => {
+  Device.getLogs(id,date).then(logs => {
     res.setHeader('Content-Type', 'application/json');
     res.json(logs);
   })  

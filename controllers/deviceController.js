@@ -13,9 +13,9 @@ function saveLog(log){
     })
 }
 
- function getLogs(id){
+ function getLogs(id, date){
     return new Promise((resolve, reject)=>{
-        service.getLogs(id).then(res => {
+        service.getLogs(id,date).then(res => {
             resolve(res)
         })
     })
