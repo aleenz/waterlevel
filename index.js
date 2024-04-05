@@ -131,10 +131,10 @@ app.get('/getLevel/:id', async (req, res) => {
     
     client.send("DistanceRequest");
     client.once('message', (msg) => {
-      
-      Device.updateDistance(JSON.parse(msg)).then(level => {
+      msg = JSON.parse(msg);
+      Device.updateDistance(msg).then(level => {
           res.setHeader('Content-Type', 'application/json');
-          res.json(level);
+          res.json({"distance": msg.value, "percentage":level });
         })  
       
       
