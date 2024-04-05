@@ -5,7 +5,7 @@ const config = require('./config'); // Import your database configuration
 const db = new Sequelize(config.development.database, config.development.username, config.development.password, {
   host: config.development.host,
   dialect: config.development.dialect,
-  logging: true,
+  logging: false,
   dialectOptions: {
     multipleStatements: true
   }
