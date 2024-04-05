@@ -43,6 +43,7 @@ function calcPercentage(id, distance){
 
 function updateDistance(msg){
    
+  return new Promise((resolve,reject)=>{
 
     percentage = calcPercentage(msg.id, msg.value)
 
@@ -66,13 +67,13 @@ function updateDistance(msg){
     })
     .then(result => {
     // Handle the result returned by the stored procedure
-      return result[1][0].result;
+      resolve(result[1][0].result) ;
     })
     .catch(error => {
     // Handle errors if the stored procedure call fails
     console.error(error);
     });
-    
+    })
   } 
 
 

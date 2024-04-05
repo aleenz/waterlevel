@@ -22,8 +22,11 @@ function saveLog(log){
     
 }
 function updateDistance(msg){
-
-    return service.updateDistance(msg);
+    return new Promise((resolve, reject)=>{
+        service.updateDistance(msg).then(res => {
+            resolve(res)
+        })
+    })
     
 }
 
