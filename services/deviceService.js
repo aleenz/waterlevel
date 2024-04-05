@@ -66,7 +66,9 @@ function updateDistance(msg){
     })
     .then(result => {
     // Handle the result returned by the stored procedure
-      console.log("AAAA" + result.new_percentage);
+      console.log("AAAA" + result[0].new_percentage);
+      console.log("AAAA" + result[1].new_percentage);
+
       return result;
     })
     .catch(error => {
