@@ -59,7 +59,7 @@ function updateDistance(msg){
     };
 
     // Call the stored procedure using the query() method
-    db.query(`CALL ${procedureName}(:p_serial, :p_distance, :p_percentage, result)`, {
+    db.query(`CALL ${procedureName}(:p_serial, :p_distance, :p_percentage, @new_percentage)`, {
     replacements: parameters,
     // If the stored procedure returns a result set, set `type` to `sequelize.QueryTypes.SELECT`
     type: db.QueryTypes.UPDATE // Adjust according to the stored procedure's behavior
