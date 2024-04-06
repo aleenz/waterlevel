@@ -6,7 +6,8 @@ const User = db.define('User', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement: true,
     },
     uid: {
       type: DataTypes.STRING(30),
