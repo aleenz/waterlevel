@@ -1,5 +1,5 @@
 const db = require('../db').db;
-const User = require('../models/userModel');
+const User = require('../models/user');
 const Device = require('../models/deviceModel');
 
 
