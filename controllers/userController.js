@@ -9,4 +9,9 @@ function getDevice(uid){
     })
 }
 
-module.exports = {getDevice}
+async function getUser(uid,correo){
+    const [user, created] = await service.getUser(uid,correo);
+    return [user, created];
+}
+
+module.exports = {getDevice,getUser}

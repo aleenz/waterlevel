@@ -153,6 +153,15 @@ app.get('/getLogs/:id/:date', async (req, res) => {
   })  
 });
 
+app.get('/getUser/:uid/:correo', async (req, res) => {
+  const { uid,correo } = req.params;
+  
+  const [user, created ] = await User.getUser(uid,correo);
+    res.setHeader('Content-Type', 'application/json');
+    res.json({"user":user, "created": created});
+  
+});
+
 server.listen(3000, () => console.log("Listening on port 3000"));
 
 
