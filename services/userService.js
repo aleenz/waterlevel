@@ -10,13 +10,16 @@ async function getUser(uid,correo){
       uid: uid,
       correo: correo
     }
-  });
+  }
 
-  console.log(user.uid); // 'sdepold'
-  console.log(user.correo); // This may or may not be 'Technical Lead JavaScript'
-  console.log(created); // The boolean indicating whether this instance was just created
-  if (created) {
-    console.log(user.correo); // This will certainly be 'Technical Lead JavaScript'
+
+);
+  
+  if(user !== null && !created){
+      getDevice(user.uid).then(d => {
+        return [user, created,d];
+
+      });
   }
 
   return [user, created];
