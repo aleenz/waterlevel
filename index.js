@@ -8,6 +8,7 @@ const wss = new WebSocket.Server({server:server})
 
 const db = require('./db').db;
 const Device = require('./controllers/deviceController');
+const User = require('./controllers/userController');
 
 db
   .authenticate()
