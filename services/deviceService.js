@@ -114,6 +114,8 @@ function getLogs(id, date){
               serial: id
             }
           }).then(device => {
+            console.log(date);
+
             const DATE_START = new Date(Date.parse(date) ).setHours(0, 0, 0, 0);
             const DATE_END = new Date(Date.parse(date)+86400 ).setHours(23,59,59,999);
             console.log(DATE_START + " |  " + DATE_END );
