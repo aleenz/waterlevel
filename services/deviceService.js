@@ -116,6 +116,7 @@ function getLogs(id, date){
           }).then(device => {
             const DATE_START = new Date(Date.parse(date) ).setHours(0, 0, 0, 0);
             const DATE_END = new Date(Date.parse(date)+86400 ).setHours(23,59,59,999);
+            console.log(DATE_START + " |  " + DATE_END );
             //db.query('SELECT percentage, CONVERT_TZ(updatedAt,"+00:00","-06:00") AS updatedAt FROM device_log WHERE device = "0001" and updatedAt BETWEEN "2024-04-04 06:00:00" AND "2024-04-05 05:59:59"')
             DeviceLog.findAll({
               
