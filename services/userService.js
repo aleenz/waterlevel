@@ -2,37 +2,34 @@ const db = require('../db').db;
 const User = require('../models/user');
 const Device = require('../models/deviceModel');
 
-async function getUser(uid,correo){
+ function getUser(uid){
   //find user, if not exists create it 
-  const [user, created] = await User.findOrCreate({
-    where: { uid: uid },
-    defaults: {
-      uid: uid,
-      correo: correo
-    }
-  }
+  return new Promise((resolve,reject)=>{
 
-
-);
+    User.findOne({
+      where: { uid: uid },
+      
+    }).then(user => {
+      if(user !== null){
+          getDevice(user.id).then(d => {
+           
+            resolve([user,d])
+    
+          });
+      }
+    });
+  });
+    
   
-  if(user !== null && !created){
-      getDevice(user.uid).then(d => {
-        return [user, created,d];
-
-      });
-  }
-
-  return [user, created];
 }
 
-function getDevice(uid){
+function getDevice(id){
     return new Promise((resolve,reject)=>{
         User.findOne({
             where: {
-              uid: uid
+              id: id
             }
           }).then(user => {
-           
             Device.findOne({
                 where: {
                     user: user.id
@@ -40,7 +37,6 @@ function getDevice(uid){
                 })
                 .then(device => {
                 // Use the retrieved information (result)
-                    
                     resolve(device);
                 })
                 .catch(error => {

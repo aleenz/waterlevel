@@ -153,12 +153,15 @@ app.get('/getLogs/:id/:date', async (req, res) => {
   })  
 });
 
-app.get('/getUser/:uid/:correo', async (req, res) => {
+app.get('/getUser/:uid', async (req, res) => {
   const { uid,correo } = req.params;
   
-  const [user, created ] = await User.getUser(uid,correo);
+  User.getUser(uid).then(array=>{
+    
     res.setHeader('Content-Type', 'application/json');
-    res.json({"user":user, "created": created});
+    res.json(array);
+  });
+  
   
 });
 

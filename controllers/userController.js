@@ -9,9 +9,15 @@ function getDevice(uid){
     })
 }
 
-async function getUser(uid,correo){
-    const [user, created] = await service.getUser(uid,correo);
-    return [user, created];
+async function getUser(uid){
+    
+    return new Promise((resolve,reject)=>{
+        service.getUser(uid)
+        .then(array=>{
+            resolve(array);
+        })
+    });
+    
 }
 
 module.exports = {getDevice,getUser}
